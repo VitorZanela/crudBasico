@@ -1,3 +1,18 @@
+def menu():
+    print  ('[1] Adicionar contato\n'
+            '[2] Ver contatos\n'
+            '[3] Atualizar contato\n'
+            '[4] Remover contato\n'
+            '[0] Sair')
+    while True:
+        msg = int(input('Digite a opção: '))
+        if msg == 1:
+            adicionar()
+        if msg == 2:
+            vercontato()
+        elif msg == 0:
+            break
+
 def adicionar():
     global cadastro
     global usuarios
@@ -27,19 +42,8 @@ cadastro = {}
 usuarios = []
 
 #Menu interativo
-print  ('[1] Adicionar contato\n'
-        '[2] Ver contatos\n'
-        '[3] Atualizar contato\n'
-        '[4] Remover contato\n'
-        '[0] Sair')
-while True:
-    menu = int(input('Digite a opção: '))
-    if menu == 1:
-        adicionar()
-    if menu == 2:
-        vercontato()
-    elif menu == 0:
-        break
+menu()
+
 
 
 
