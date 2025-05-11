@@ -13,11 +13,11 @@ Praticar fundamentos de:
 
 ## Funcionalidades
 
-- Adicionar novo registro
-- Listar todos os registros
-- Atualizar registros existentes
-- Remover registros
-- Salvar e carregar dados automaticamente de um arquivo `dados.json`
+- Adicionar novo registro (JA EM FUNCIONAMENTO)
+- Listar todos os registros (JA EM FUNCIONAMENTO)
+- Atualizar registros existentes (PENDENTE)
+- Remover registros (FAZENDO ATUALIZAÇÕES)
+- Salvar e carregar dados automaticamente de um arquivo `dados.json` (PENDENTE)
 
 ## Requisitos
 
