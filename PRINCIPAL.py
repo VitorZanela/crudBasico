@@ -1,30 +1,6 @@
 from modulos.layout import *
 from modulos.arquivo import *
 
-def atualizarContato():
-    global cadastro
-    global usuarios
-    print('cod ', end=' ')
-    for p in cadastro.keys():
-        print(f'{p:<15}', end='')
-    print()
-    for chave, valores in enumerate(usuarios):
-        print(f'{chave:<5}', end='')
-    for v in valores.values():
-        print(f'{str(v):<15}', end='')
-    print()
-    while True:
-        escolha = int(input('Qual contato deseja atualizar? (999 para cancelar): '))
-        if escolha == 999:
-            break
-        elif escolha >= len(usuarios):
-            print('ERRO! Opção invalida')
-        else:
-            print(f' -> ALTERANDO DADOS DE USUÁRIO: {usuarios[escolha]["Nome"]}')
-
-
-
-
 arq = 'contatos.txt'
 
 if not verificarArquivo(arq):
@@ -42,6 +18,27 @@ while True:
     elif escolha == 2:
         cabecalho('CONTATOS ADICIONADOS')
         lerContatos(arq)
+        while True:
+            opc = menuContatos(['Adicionar Novo Contato', 'Atualizar Contato', 'Excluir Contato','Sair'])
+            if opc == 1:
+                cabecalho('ADICIONANDO NOVO CONTATO')
+                nome = str(input('Nome: '))
+                tel = int(input('Telefone: '))
+                email = str(input('Email: '))
+                adicionarCont(arq, nome, tel, email)
+                cabecalho('CONTATOS ATUALIZADOS')
+                lerContatos(arq)
+            elif opc == 2:
+                cabecalho('opc2')
+                break
+            elif opc == 3:
+                cabecalho('ESCOLHA O CONTATO')
+                excluirContatos(arq)
+            elif opc == 4:
+                break
+            else:
+                cabecalho('Opção Invalida, Tente novamente!')
+        break
     elif escolha == 3:
         cabecalho('Programa Encerrado. Até logo!')
         break
