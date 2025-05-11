@@ -1,45 +1,45 @@
-def adicionar():
-    global cadastro
-    global usuarios
-    cadastro['Nome'] = str(input("Nome: "))
-    cadastro['Telefone'] = int(input("Telefone: "))
-    cadastro['Email'] = str(input('Email: '))
-    usuarios.append(cadastro.copy())
+from modulos.layout import *
+from modulos.arquivo import *
 
-    return cadastro
+arq = 'contatos.txt'
 
-def vercontato():
-    global cadastro
-    global usuarios
-    print('Cod', end=' ')
-    for p in cadastro.keys():
-        print(f'{p:<15}', end='')
-    print()
-    for chave, v in enumerate(usuarios):
-        print(f'{chave:<3}', end='')
-        for valores in cadastro.values():
-            print(f'{str(valores):<15}', end=' ')
-        print()
-
-
-
-cadastro = {}
-usuarios = []
+if not verificarArquivo(arq):
+    criarArquivo(arq)
 
 #Menu interativo
-print  ('[1] Adicionar contato\n'
-        '[2] Ver contatos\n'
-        '[3] Atualizar contato\n'
-        '[4] Remover contato\n'
-        '[0] Sair')
 while True:
-    menu = int(input('Digite a opção: '))
-    if menu == 1:
-        adicionar()
-    if menu == 2:
-        vercontato()
-    elif menu == 0:
+    escolha = menu(['Adicionar Novo Contato','Ver Contatos','Sair'])
+    if escolha == 1:
+        cabecalho('ADICIONANDO NOVO CONTATO')
+        nome = str(input('Nome: '))
+        tel = int(input('Telefone: '))
+        email = str(input('Email: '))
+        adicionarCont(arq, nome, tel, email)
+    elif escolha == 2:
+        cabecalho('CONTATOS ADICIONADOS')
+        lerContatos(arq)
+        while True:
+            opc = menuContatos(['Adicionar Novo Contato', 'Atualizar Contato', 'Excluir Contato','Sair'])
+            if opc == 1:
+                cabecalho('ADICIONANDO NOVO CONTATO')
+                nome = str(input('Nome: '))
+                tel = int(input('Telefone: '))
+                email = str(input('Email: '))
+                adicionarCont(arq, nome, tel, email)
+                cabecalho('CONTATOS ATUALIZADOS')
+                lerContatos(arq)
+            elif opc == 2:
+                cabecalho('opc2')
+                break
+            elif opc == 3:
+                cabecalho('ESCOLHA O CONTATO')
+                excluirContatos(arq)
+            elif opc == 4:
+                break
+            else:
+                cabecalho('Opção Invalida, Tente novamente!')
         break
-
-
+    elif escolha == 3:
+        cabecalho('Programa Encerrado. Até logo!')
+        break
 
