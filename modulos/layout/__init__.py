@@ -5,18 +5,17 @@ def linha(tam=40):
 
 def cabecalho(txt):
     linha()
-    print(F'   \033[1m{txt}\033[m'.center(40))
+    print(f'   \033[1m{txt}\033[m'.center(40))
     linha()
 
 def menu(lista):
-    while True:
-        sleep(1)
-        cabecalho('MENU PRINCIPAL')
-        for chave, valor in enumerate(lista):
-            print(f'{chave+1} - {valor}')
-        linha()
-        opc = leiaInt('Sua Opção: ')
-        return opc
+    sleep(1)
+    cabecalho('MENU PRINCIPAL')
+    for chave, valor in enumerate(lista):
+        print(f'{chave+1} - {valor}')
+    linha()
+    opc = leiaInt('Sua Opção: ')
+    return opc
     
 def leiaInt(txt):
     try:
@@ -25,3 +24,12 @@ def leiaInt(txt):
         print('ERRO! Opção Invalida!')
     else:
         return n
+    
+def menuContatos(lista):
+    sleep(1)
+    cabecalho('EDIÇÃO CONTATOS')
+    for chave, valor in enumerate(lista):
+        print(f'{chave+1} - {valor}')
+    linha()
+    opcao = leiaInt('Sua Opção: ')
+    return opcao
