@@ -19,7 +19,7 @@ while True:
         cabecalho('CONTATOS ADICIONADOS')
         lerContatos(arq)
         while True:
-            opc = menuContatos(['Adicionar Novo Contato', 'Atualizar Contato', 'Excluir Contato','Sair'])
+            opc = menuContatos(['Adicionar Novo Contato', 'Atualizar Contato', 'Excluir Contato','Ver Contatos Atualizados','Sair'])
             if opc == 1:
                 cabecalho('ADICIONANDO NOVO CONTATO')
                 nome = str(input('Nome: '))
@@ -29,12 +29,15 @@ while True:
                 cabecalho('CONTATOS ATUALIZADOS')
                 lerContatos(arq)
             elif opc == 2:
-                cabecalho('opc2')
-                break
+                cabecalho('ESCOLHA O CONTATO')
+                atualizarContato(arq)
             elif opc == 3:
                 cabecalho('ESCOLHA O CONTATO')
                 excluirContatos(arq)
             elif opc == 4:
+                cabecalho('CONTATOS ATUALIZADOS')
+                lerContatos(arq)
+            elif opc == 5:
                 break
             else:
                 cabecalho('Opção Invalida, Tente novamente!')
