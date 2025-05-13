@@ -26,7 +26,7 @@ def leiaInt(txt):
         return n
     
 def menuContatos(lista):
-    sleep(1)
+    sleep(1.5)
     cabecalho('EDIÇÃO CONTATOS')
     for chave, valor in enumerate(lista):
         print(f'{chave+1} - {valor}')

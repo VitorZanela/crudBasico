@@ -38,6 +38,7 @@ while True:
                 cabecalho('CONTATOS ATUALIZADOS')
                 lerContatos(arq)
             elif opc == 5:
+                cabecalho('Programa Encerrado. Até logo!')
                 break
             else:
                 cabecalho('Opção Invalida, Tente novamente!')
@@ -45,4 +46,6 @@ while True:
     elif escolha == 3:
         cabecalho('Programa Encerrado. Até logo!')
         break
+    else:
+        cabecalho('Opção invalida! Tente novamente.')
 
