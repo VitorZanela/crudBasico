@@ -1,7 +1,7 @@
 from modulos.layout import *
 from modulos.arquivo import *
 
-arq = 'contatos.txt'
+arq = 'contatos.json'
 
 if not verificarArquivo(arq):
     criarArquivo(arq)
