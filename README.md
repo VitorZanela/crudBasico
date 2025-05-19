@@ -17,9 +17,9 @@ Praticar fundamentos de:
 - Listar todos os registros (JA EM FUNCIONAMENTO)
 - Atualizar registros existentes (JA EM FUNCIONAMENTO)
 - Remover registros (JA EM FUNCIONAMENTO)
-- Atualização da vizualização e recebimento dos dados (PENDENTE)
+- Atualização da vizualização e recebimento dos dados (JA EM FUNCIONAMENTO)
 - Atualização de cores (Melhor visulização) (PENDENTE)
-- Salvar e carregar dados automaticamente de um arquivo `dados.json` (PENDENTE)
+- Salvar e carregar dados automaticamente de um arquivo `dados.json` (EM ANDAMENTO)
 
 ## Requisitos
 
