@@ -1,48 +1,44 @@
 from modulos.layout import *
+from time import sleep
+import json
 
 def verificarArquivo(arq):
     try:
-        a = open(arq, 'rt')
-        a.close()
-    except FileNotFoundError:
-        return False
-    else:
+        with open(arq, 'r') as f:
+            json.load(f)
         return True
+    except (FileNotFoundError, json.JSONDecodeError):
+        return False
 
 def criarArquivo(arq):
     try:
-        a = open(arq, 'wt+')
-        a.close()
+        with open(arq, 'w') as f:
+            json.dump([], f)
     except:
         cabecalho('Erro ao criar Arquivo')
 
 def lerContatos(arq):
-    try:
-        a = open(arq, 'rt')
-    except:
-        cabecalho('Erro ao ler arquivo')
-    else: 
-        for pessoa in a:
-            dado = pessoa.split(';')
-            dado[2] = dado[2].replace('\n','')
-            print(f'Nome: {dado[0]} - Telefone: {dado[1]} -  E-mail: {dado[2]}')
-    finally:
-        a.close()
+        try:
+            with open(arq, 'r') as f:
+                contatos = json.load(f)
+        except:
+            cabecalho('Erro ao ler arquivo')
+        else:
+            for contato in contatos:
+                print(f"Nome: {contato['nome']} - Telefone: {contato['telefone']} - Email: {contato['email']}")
+
 
 def adicionarCont(arq,nome,tel,email):
     try:
-        a = open(arq, 'at')
+        with open(arq, 'r') as f:
+            contatos = json.load(f)
+        contatos.append({"nome": nome, "telefone": tel, "email": email})
+        with open(arq, 'w') as f:
+            json.dump(contatos, f, indent=4)
     except:
         cabecalho('Erro ao cadastrar')
     else:
-        try:
-            a.write(f'{nome};{tel};{email}\n')
-        except:
-            cabecalho('Não foi possivel cadastrar')
-        else:
-            cabecalho(f'{nome} cadastrado com sucesso!')
-    finally:
-        a.close()
+        cabecalho(f'{nome} cadastrado com sucesso!')
 
 def excluirContatos(arq):
     try:
@@ -74,43 +70,43 @@ def excluirContatos(arq):
 def atualizarContato(arq):
     try:
         with open(arq, 'r') as f:
-            a = f.readlines()
+            contatos = json.load(f)
     except:
         cabecalho('Erro ao ler arquivo')
         return
+
     while True:
-        for i, pessoa in enumerate(a):
-            dado = pessoa.strip().split(';')
-            print(f'{i+1} {dado[0]}')
+        for i, contato in enumerate(contatos):
+            print(f'{i+1} - {contato["nome"]}')
         print('0 - Cancelar alteração')
         linha()
-        opção = leiaInt('Digite qual contato quer alterar: ')
+        opcao = leiaInt('Digite qual contato quer alterar: ')
         sleep(1)
-        if opção >= 1 and opção <= len(a):
-            dado = a[opção - 1].strip().split(';')
+
+        if opcao >= 1 and opcao <= len(contatos):
+            contato = contatos[opcao - 1]
+            campos = list(contato.keys())
             print('\nDados do contato:')
-            for i, campo in enumerate(dado):
-                print(f'{i+1} - {campo}')
+            for i, campo in enumerate(campos):
+                print(f'{i+1} - {campo.capitalize()}: {contato[campo]}')
             print('0 - Cancelar alteração')
             linha()
             campo = leiaInt('Qual campo deseja alterar? ')
-            while True:
-                if campo >= 1 and campo <= len(dado):
-                    novo = input(f'Digite o novo dado: ')
-                    dado[campo - 1] = novo
-                    a[opção - 1] = ';'.join(dado) + '\n'
-                    b = open(arq, 'w')
-                    b.writelines(a)
-                    b.close()
-                    cabecalho('Contato atualizado com sucesso!')
-                    break
-                elif campo == 0:
-                    break
-                else:
-                    cabecalho('Campo invalido! Tente novamente.')
-                    break
-            break
-        elif opção == 0:
+
+            if campo >= 1 and campo <= len(campos):
+                novo = input('Digite o novo dado: ')
+                contatos[opcao - 1][campos[campo - 1]] = novo
+                with open(arq, 'w') as f:
+                    json.dump(contatos, f, indent=4)
+                cabecalho('Contato atualizado com sucesso!')
+                break
+            elif campo == 0:
+                break
+            else:
+                cabecalho('Campo inválido! Tente novamente.')
+                break
+
+        elif opcao == 0:
             break
         else:
-            cabecalho('Opção invalida! Tente novamente.')
+            cabecalho('Opção inválida! Tente novamente.')
