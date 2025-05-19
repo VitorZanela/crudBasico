@@ -43,23 +43,21 @@ def adicionarCont(arq,nome,tel,email):
 def excluirContatos(arq):
     try:
         with open(arq, 'r') as f:
-            a = f.readlines()
+            a = json.load(f)
     except:
         cabecalho('Erro ao ler arquivo!')
     else:
         while True:
             sleep(1)
             for chave, pessoa in enumerate(a):
-                dado = pessoa.strip().split(';')
-                print(f'{chave+1} - {dado[0]}')
+                print(f'{chave+1} - {pessoa["nome"]}')
             print('0 - Cancelar exclusão')
             linha()
             opc = leiaInt('Digite a opção de exclusão: ')
             if opc >= 1 and opc < len(a)+1:
                 del a[opc - 1]
-                b = open(arq, 'w')
-                b.writelines(a)
-                b.close()
+                with open(arq, 'w') as f:
+                    json.dump(a, f, indent=4)
                 cabecalho(f'Contato excluido com sucesso')
                 break
             elif opc == 0:
